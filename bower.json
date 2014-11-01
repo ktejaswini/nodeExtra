@@ -1,0 +1,12 @@
+{
+  "name": "ecomm",
+  "version": "0.0.1",
+  "description": "ecomm app",
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "angular": "~1.2.26",
+    "angular-route": "~1.2.26",
+    "angular-resource": "~1.2.26"
+  }
+}

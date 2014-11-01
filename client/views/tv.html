@@ -1,0 +1,16 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <ul>
+        <li ng-repeat="tv in value">
+        <img src="/images/{{tv.name}}.jpeg" alt="{{tv.name}}" style="width:150px;height:110px" align="left" hspace="10">
+        <h2>{{tv.name}}-{{tv.model}}</h2>
+        <p>MSRP : {{tv.price}}</p>
+        <p><a class="btn btn-primary" href="/store/tv/{{tv.tvid}}" role="button">View details &raquo;</a></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+      
