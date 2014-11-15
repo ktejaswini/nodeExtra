@@ -10,6 +10,7 @@ storeApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider.
       when('/store', {
         templateUrl: 'views/index.html',
+        controller: 'indexCtrl'
       }).
       when('/store/cars', {
         templateUrl: 'views/cars.html',

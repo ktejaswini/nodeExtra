@@ -4,7 +4,6 @@ var cars = items.carsRecords ;
 var routers = items.routersRecords ;
 var tv = items.tvRecords ;
 
-//cars
 module.exports.carsData = function (req, res) {
 	cars.find({}, function (err, results) {
 		res.send(results);
@@ -18,9 +17,6 @@ module.exports.carsDetail = function (req, res) {
 		res.send(results);
 	});
 }
-//cars-end
-
-//routers
 
 module.exports.routersData = function (req, res) {
 	routers.find({}, function (err, results) {
@@ -35,13 +31,8 @@ module.exports.routersDetail = function (req, res) {
 	});
 }
 
-//routers-end
-
-//tv
-
 module.exports.tvData = function (req, res) {
 	tv.find({}, function (err, results) {
-		console.log(results);
 		res.send(results);
 	});
 }
@@ -52,6 +43,3 @@ module.exports.tvDetail = function (req, res) {
 		res.send(results);
 	});
 }
-
-//tv-end
-
