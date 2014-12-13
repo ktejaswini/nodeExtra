@@ -2,25 +2,25 @@
 
 var clientCtrl = angular.module('clientCtrl',[]);
 
-clientCtrl.controller('editCtrl',['$scope','$resource',
-	function ($scope, $resource) {
-		var result = $resource('/api/list');
-		$scope.value = result.query();
-	}]);
+//clientCtrl.controller('editCtrl',['$scope','$resource',
+//	function ($scope, $resource) {
+//		var result = $resource('/api/list');
+//		$scope.value = result.query();
+//	}]);
 
-clientCtrl.controller('delCtrl',['$scope','$resource','$routeParams',
-	function ($scope, $resource, $routeParams) {
-		var id1 = $routeParams.id ;
-		console.log('going to delete '+id1);
+//clientCtrl.controller('delCtrl',['$scope','$resource','$routeParams',
+//	function ($scope, $resource, $routeParams) {
+//		var id1 = $routeParams.id ;
+//		console.log('going to delete '+id1);
 
-		var result = $resource('/api/delMachine/:id', {id:'@id'});
-		var res = result.delete({id:id1}, function() {
-  			console.log('delete successfull');
-		});
+//		var result = $resource('/api/delMachine/:id', {id:'@id'});
+//		var res = result.delete({id:id1}, function() {
+  //			console.log('delete successfull');
+//		});
 
-		var result1 = $resource('/api/list');
-		$scope.value = result1.query();
-	}]);
+//		var result1 = $resource('/api/list');
+//		$scope.value = result1.query();
+//	}]);
 
 // clientCtrl.controller('addCtrl',['$scope','$resource','$routeParams',
 // 	function ($scope,$resource,$routeParams) {
