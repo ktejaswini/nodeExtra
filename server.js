@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/cmpe281');
+mongoose.connect('mongodb://sadhanap:sadhana@ds043350.mongolab.com:43350/sadhana');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
