@@ -1,5 +1,11 @@
 var mongoose = require('mongoose');
 
-module.exports.carsRecords = mongoose.model('cars', {});
-module.exports.routersRecords = mongoose.model('routers', {});
-module.exports.tvRecords = mongoose.model('tvs', {});
+var gumballSchema = mongoose.Schema({
+	model: String,
+	serial: String,
+	inventory: String,
+	state: String
+});
+
+
+module.exports.gumballs = mongoose.model('gumballMachine', gumballSchema);

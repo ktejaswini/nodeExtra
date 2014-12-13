@@ -1,43 +1,46 @@
 'use strict';
 
-var storeApp = angular.module('storeApp', [
+var gumballApp = angular.module('gumballApp', [
   'ngRoute',
   'clientCtrl',
   'ngResource'
 ]);
 
-storeApp.config(function ($routeProvider, $locationProvider) {
+gumballApp.config(function ($routeProvider, $locationProvider) {
     $routeProvider.
-      when('/store', {
-        templateUrl: 'views/index.html',
-        controller: 'indexCtrl'
+      when('/index', {
+        templateUrl: 'views/entry.html',
       }).
-      when('/store/cars', {
-        templateUrl: 'views/cars.html',
-        controller: 'carsCtrl'
+      when('/edit', {
+        templateUrl: 'views/editMachines.html',
+        controller: 'editCtrl'
       }).
-      when('/store/cars/:carid', {
-        templateUrl: 'views/carsDetail.html',
-        controller: 'carsDetailCtrl'
+      when('/edit/:id', {
+        templateUrl: 'views/editMachines.html',
+        controller: 'delCtrl'
       }).
-      when('/store/routers',{
-        templateUrl: 'views/routers.html',
-        controller: 'routersCtrl'
+      when('/add', {
+        templateUrl: 'views/editMachines.html',
+        controller: 'addCtrl'
       }).
-      when('/store/routers/:routerid',{
-        templateUrl: 'views/routersDetail.html',
-        controller: 'routersDetailCtrl'
+      when('/select/:id', {
+        templateUrl: 'views/main.html',
+        controller: 'mainCtrl'
       }).
-      when('/store/tv',{
-        templateUrl: 'views/tv.html',
-        controller: 'tvCtrl'
+      when('/select', {
+        templateUrl: 'views/selectMachine.html',
+        controller: 'selectCtrl'
       }).
-      when('/store/tv/:tvid',{
-        templateUrl: 'views/tvDetail.html',
-        controller: 'tvDetailCtrl'
+      when('/insert/:id', {
+        templateUrl: 'views/main.html',
+        controller: 'insertCtrl'
+      }).
+      when('/turn/:id', {
+        templateUrl: 'views/main.html',
+        controller: 'turnCtrl'
       }).
       otherwise({
-        redirectTo: '/store'
+        redirectTo: '/index'
       });
 
       $locationProvider.html5Mode(true);

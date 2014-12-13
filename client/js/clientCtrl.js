@@ -1,63 +1,78 @@
 'use strict';
 
 var clientCtrl = angular.module('clientCtrl',[]);
-var d = new Date().toISOString();
 
-clientCtrl.controller('indexCtrl',['$scope',
-	function ($scope) {
-		$scope.value = 'Home Page';
-	}]);
-
-clientCtrl.controller('carsCtrl',['$scope','$resource',
+clientCtrl.controller('editCtrl',['$scope','$resource',
 	function ($scope, $resource) {
-		var result = $resource('/store/carsData');
+		var result = $resource('/api/list');
 		$scope.value = result.query();
 	}]);
 
-clientCtrl.controller('routersCtrl',['$scope','$resource', 
-	function ($scope, $resource) {
-		var result = $resource('/store/routersData');
-		$scope.value = result.query();
-	}]);
- 	
-clientCtrl.controller('tvCtrl',['$scope','$resource', 
-	function ($scope, $resource) {
-		var result = $resource('/store/tvData');
-		$scope.value = result.query();
-	}]);
-
-clientCtrl.controller('carsDetailCtrl',['$scope','$resource', '$routeParams',
+clientCtrl.controller('delCtrl',['$scope','$resource','$routeParams',
 	function ($scope, $resource, $routeParams) {
-		var carid = $routeParams.carid ;
-		var url = "/store/carsDetail/"+carid;
+		var id1 = $routeParams.id ;
+		console.log('going to delete '+id1);
+
+		var result = $resource('/api/delMachine/:id', {id:'@id'});
+		var res = result.delete({id:id1}, function() {
+  			console.log('delete successfull');
+		});
+
+		var result1 = $resource('/api/list');
+		$scope.value = result1.query();
+	}]);
+
+// clientCtrl.controller('addCtrl',['$scope','$resource','$routeParams',
+// 	function ($scope,$resource,$routeParams) {
+// 		var x = {}; 
+// 		x = $scope.machine ;
+// 		console.log('add Ctrl');
+// 		console.log('model--->'+ x);
+// 		// var addResult = $resource('/api/newMachine');
+// 		// var res = addResult.save();
+// 		// console.log('output'+ addResult);
+// 		// var result1 = $resource('/api/list');
+// 		// $scope.value = result1.query();
+// 	}]);
+
+clientCtrl.controller('selectCtrl',['$scope','$resource',
+	function ($scope, $resource) {
+		console.log('inside select ctrl');
+		var result = $resource('/api/list');
+		$scope.value = result.query();
+	}]);
+
+clientCtrl.controller('mainCtrl',['$scope','$resource','$routeParams',
+	function ($scope,$resource,$routeParams) {
+		console.log('main Ctrl');
+		var id = $routeParams.id;
+		var url = 'api/listOne/'+id;
 		var result = $resource(url);
 		var res = result.get();
-		console.log(res);
-		console.log(d);
-		if(d > res.startDate && d < res.endDate) {
-			$scope.stock = 'In Stock';
-		}
-		else {
-			$scope.stock = 'Out of Stock';
-		}
-		$scope.value = result.get();
-		
-	}]);
- 
-clientCtrl.controller('routersDetailCtrl',['$scope','$resource', '$routeParams',
-	function ($scope, $resource, $routeParams) {
-		var routerid = $routeParams.routerid ;
-		var url = "/store/routersDetail/"+routerid;
-		var result = $resource(url);
-		$scope.value = result.get();
+		$scope.value = res;
 	}]);
 
-clientCtrl.controller('tvDetailCtrl',['$scope','$resource', '$routeParams',
-	function ($scope, $resource, $routeParams) {
-		var tvid = $routeParams.tvid ;
-		var url = "/store/tvDetail/"+tvid;
-		var result = $resource(url);
-		$scope.value = result.get();
+clientCtrl.controller('insertCtrl',['$scope','$resource','$routeParams',
+function ($scope,$resource,$routeParams) {
+		console.log('insert Ctrl');
+		var id = $routeParams.id;
+		var url = 'api/insert/'+id;
+		var result = $resource(url, {}, {'put': {method: 'PUT', params: {}, isArray: false}});
+		var res = result.put();
+		// var url1 = 'api/listOne/'+id;
+		// var result1 = $resource(url1);
+		// var res1 = result1.get();
+		$scope.value = res;
 	}]);
- 	
+
+clientCtrl.controller('turnCtrl',['$scope','$resource','$routeParams',
+function ($scope,$resource,$routeParams) {
+		console.log('turn Ctrl');
+		var id = $routeParams.id;
+		var url = 'api/turn/'+id;
+		var result = $resource(url, {}, {'put': {method: 'PUT', params: {}, isArray: false}});
+		var res = result.put();
+		console.log('After put');
+		$scope.value = res;
+	}]);
  	

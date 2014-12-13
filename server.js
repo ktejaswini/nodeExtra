@@ -1,4 +1,3 @@
-
 var express      = require('express');
 var app          = express();
 var path         = require('path');
@@ -7,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var mongoose     = require('mongoose');
 var servCtrl     = require('./server/controllers/servCtrl');
+var routes       = require('./server/routes');
 
 app.use(express.static(path.join(__dirname, '/client')));
 app.use(logger('dev'));
@@ -15,20 +15,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/mydb');
+mongoose.connect('mongodb://localhost:27017/cmpe281');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+	console.log("mongodb connected");  
+});
 
-
-//API Calls
-app.get('/store/carsData', servCtrl.carsData);
-app.get('/store/carsDetail/:carid', servCtrl.carsDetail);
-app.get('/store/routersData', servCtrl.routersData);
-app.get('/store/routersDetail/:routerid', servCtrl.routersDetail);
-app.get('/store/tvData', servCtrl.tvData);
-app.get('/store/tvDetail/:tvid', servCtrl.tvDetail);
+// All API Calls routed to routes.js
+app.use('/api', routes);
 
 //Catch all requests
 app.get('*', function(req, res) {
-	res.sendFile(__dirname + '/client/store.html');
+	res.sendFile(__dirname + '/client/index.html');
 });
 
 //Listen on port 3000
