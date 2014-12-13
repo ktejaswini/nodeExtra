@@ -30,7 +30,11 @@ app.get('*', function(req, res) {
 	res.sendFile(__dirname + '/client/index.html');
 });
 
+
+var port = process.env.OPENSHIFT_NODEJS_PORT
+, ip = process.env.OPENSHIFT_NODEJS_IP ;
+
 //Listen on port 3000
-app.listen(3000, function() {
+app.listen(port,ip, function() {
     console.log('Node server started....');
 })
